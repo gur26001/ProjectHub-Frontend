@@ -25,12 +25,12 @@ export default function CreateProject() {
 				title: ititle,
 				description: iDescription,
 				image: iImage,
-				createdBy: 'admin1',
+				createdBy: userName,
 			})
 			.then((resp) => {
 				if (resp.status === 200) {
 					setRedirect(true);
-					
+
 					// localStorage.setItem('openedProject', resp.data);
 				}
 			})
@@ -102,7 +102,9 @@ export default function CreateProject() {
 						}}
 					/>
 					<span style={{ fontSize: '14px' }}>
+						By
 						{
+							userName
 							// name taken from local state and store it in createBY
 						}
 					</span>

@@ -17,7 +17,7 @@ function Header() {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 
 	const userName = useSelector((state) => state.user.setUsername);
-	
+
 	if (isLoggedIn) {
 		// const count = useSelector((state) => state.currentUser.username);
 	}
@@ -81,10 +81,11 @@ function Header() {
 							onMouseLeave={handleAvatarLeave}
 						>
 							<Avatar sx={{ marginRight: '8px' }}>U</Avatar>
-							{(
+							{isHovered && (
 								<Typography
 									variant="body1"
 									sx={{
+										height: '20px',
 										position: 'absolute',
 										bottom: '-50px',
 										width: '100%',
@@ -96,8 +97,10 @@ function Header() {
 										borderRadius: '4px',
 										boxShadow:
 											'0px 2px 4px rgba(0, 0, 0, 0.1)',
+										color: 'white',
 									}}
 								>
+									sac-
 									{userName}
 									{/* {username} */}
 								</Typography>
