@@ -6,44 +6,61 @@ import {
 	CardMedia,
 	Button,
 } from '@mui/material';
-import { Link, Outlet, useParams } from 'react-router-dom';
+import { Link, Navigate, Outlet, useParams } from 'react-router-dom';
 import axios from 'axios';
 import ImageUpload from '../components/ImageUpload';
 
 export default function ProjectEditPage() {
 	// const { projectKey } = useParams();
 
-	
-	const projectKey = '649975dfaeefbcf2adf9fbfc'; //getting from parameter
+	const headers = {
+		'Content-Type': 'application/json',
+		Authorization: `Bearer ${localStorage.getItem('accessTokenHub')}`,
+	};
+	const { projectKey } = useParams(); //getting from parameter
 	const [project, setProjectData] = useState({});
-	const [ititle, setITitle] = useState('');
+	const [iTitle, setITitle] = useState('');
 	const [iImage, setiImage] = useState('');
 	const [iDescription, setDescription] = useState('');
+	const [isRedirected, setRedirect] = useState(false);
 
 	useEffect(() => {
 		axios
 			.get(`http://localhost:8000/projects/${projectKey}`)
 			.then((response) => {
 				// console.log(response.data);
+
 				setProjectData(response.data);
+				setITitle(project.title);
+				setiImage(project.iImage);
+				setDescription(project.iDescription);
 			});
 	}, []); // Replace with actual data fetching logic
 	function EditPage(event) {
 		event.preventDefault();
 		axios
-			.put(`http://localhost:8000/projects/${projectKey}`, {
-				title: ititle,
-				description: iDescription,
-				image: iImage,
-			})
+			.put(
+				`http://localhost:8000/projects/${projectKey}`,
+				{
+					title: iTitle,
+					description: iDescription,
+					image: iImage,
+				},
+				{ headers }
+			)
 			.then((resp) => {
 				console.log(resp.data);
-				alert(resp.data);
+				setRedirect(true);
 			})
 			.catch((err) => {
 				console.log(err);
 			});
 	}
+
+	if (isRedirected) {
+		return <Navigate to="/" />;
+	}
+
 	return (
 		<Card
 			style={{
@@ -89,7 +106,7 @@ export default function ProjectEditPage() {
 				>
 					<input
 						type="text"
-						defaultValue={project.title}
+						defaultValue={iTitle}
 						style={{
 							fontSize: '24px',
 
@@ -99,7 +116,6 @@ export default function ProjectEditPage() {
 							paddingLeft: '10px',
 						}}
 						placeholder="Title"
-						value={ititle}
 						onChange={(event) => {
 							setITitle(event.target.value);
 						}}
@@ -133,7 +149,6 @@ export default function ProjectEditPage() {
 			>
 				<input
 					type="text"
-					defaultValue={project.image}
 					placeholder="Image Url"
 					value={iImage}
 					style={{
@@ -160,7 +175,6 @@ export default function ProjectEditPage() {
 			>
 				<textarea
 					placeholder="Desricption"
-					defaultValue={project.description}
 					value={iDescription}
 					style={{
 						fontFamily: 'Arial',

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { startTransition, useState } from 'react';
 import {
 	Card,
 	CardContent,
@@ -10,8 +10,8 @@ import {
 import Logo from '../components/LOGO';
 import axios from 'axios';
 import { Navigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { setUsername } from '../redux/user';
+import { useDispatch, useSelector } from 'react-redux';
+import { setUsername } from '../features/user/user';
 
 export default function LoginSigninPage() {
 	const [activeTab, setActiveTab] = useState('login');
@@ -23,7 +23,8 @@ export default function LoginSigninPage() {
 		setActiveTab(tab);
 	};
 
-	const dispatch = useDispatch();
+	// const userName = useSelector((state) => state.user.userName);
+	// const dispatch = useDispatch();
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
@@ -43,9 +44,9 @@ export default function LoginSigninPage() {
 						response.data.accessTokenHub
 					);
 
-					dispatch(setUsername(username));
 					// then navigate to homepage
 					setRedirected(true);
+					// console.log(userName);
 				})
 				.catch((err) => {
 					console.log(err);
@@ -115,6 +116,7 @@ export default function LoginSigninPage() {
 								variant="contained"
 								color="primary"
 								fullWidth
+								// onClick={dispatch(setUsername(username))}
 							>
 								Login
 							</Button>
@@ -161,6 +163,7 @@ export default function LoginSigninPage() {
 						</form>
 					)}
 				</CardContent>
+				{/* <span>{userName}</span> */}
 				<Box
 					style={{
 						display: 'flex',

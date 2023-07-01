@@ -16,7 +16,10 @@ import { Navigate } from 'react-router-dom';
 export default function ProjectViewPage() {
 	const { projectKey } = useParams();
 	// const projectKey = '649975dfaeefbcf2adf9fbfc'; //getting from parameter
-
+	const headers = {
+		'Content-Type': 'application/json',
+		Authorization: `Bearer ${localStorage.getItem('accessTokenHub')}`,
+	};
 	const viewMode = 'edit';
 	const [project, setProjectData] = useState({});
 	const [redirect, setRedirect] = React.useState(false);
@@ -32,7 +35,9 @@ export default function ProjectViewPage() {
 	function DeletPost(event) {
 		event.preventDefault();
 		axios
-			.delete(`http://localhost:8000/projects/${projectKey}`)
+			.delete(`http://localhost:8000/projects/${projectKey}`,{
+				headers
+			})
 			.then((resp) => {
 				console.log(resp.data);
 				setRedirect(true);

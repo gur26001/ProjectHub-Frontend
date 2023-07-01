@@ -16,7 +16,7 @@ import { useSelector, useDispatch } from 'react-redux';
 function Header() {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-	const userName = useSelector((state) => state.user.setUsername);
+	// const userName = useSelector((state) => state.user.setUsername);
 
 	if (isLoggedIn) {
 		// const count = useSelector((state) => state.currentUser.username);
@@ -101,8 +101,8 @@ function Header() {
 									}}
 								>
 									sac-
-									{userName}
-									{/* {username} */}
+									{/* {userName} */}
+									
 								</Typography>
 							)}
 						</Box>

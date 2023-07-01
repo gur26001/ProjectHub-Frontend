@@ -12,21 +12,29 @@ import axios from 'axios';
 import { useSelector } from 'react-redux';
 
 export default function CreateProject() {
+	const headers = {
+		'Content-Type': 'application/json',
+		Authorization: `Bearer ${localStorage.getItem('accessTokenHub')}`,
+	};
 	const [project, setProjectData] = useState({});
 	const [ititle, setITitle] = useState('');
 	const [iImage, setiImage] = useState('');
 	const [iDescription, setDescription] = useState('');
 	const [redirect, setRedirect] = React.useState(false);
-	const userName = useSelector((state) => state.user.setUsername);
+	// const userName = useSelector((state) => state.user.setUsername);
 	function createPost(event) {
 		event.preventDefault();
 		axios
-			.post(`http://localhost:8000/projects/`, {
-				title: ititle,
-				description: iDescription,
-				image: iImage,
-				createdBy: userName,
-			})
+			.post(
+				`http://localhost:8000/projects/`,
+				{
+					title: ititle,
+					description: iDescription,
+					image: iImage,
+					createdBy: 'admin1',
+				},
+				{ headers }
+			)
 			.then((resp) => {
 				if (resp.status === 200) {
 					setRedirect(true);
@@ -104,7 +112,7 @@ export default function CreateProject() {
 					<span style={{ fontSize: '14px' }}>
 						By
 						{
-							userName
+							// userName
 							// name taken from local state and store it in createBY
 						}
 					</span>
