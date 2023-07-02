@@ -31,7 +31,7 @@ export default function LoginSigninPage() {
 		// IF LOGIN TAB OPENED:
 		if (activeTab === 'login') {
 			axios
-				.post(`http://localhost:8000/users/login`, {
+				.post(`https://projecthub-server.onrender.com/users/login`, {
 					username,
 					password,
 				})
@@ -53,7 +53,7 @@ export default function LoginSigninPage() {
 				});
 		} else {
 			axios
-				.post(`http://localhost:8000/users/`, {
+				.post(`https://projecthub-server.onrender.com/users/`, {
 					username,
 					email,
 					password,

@@ -26,7 +26,7 @@ export default function ProjectEditPage() {
 
 	useEffect(() => {
 		axios
-			.get(`http://localhost:8000/projects/${projectKey}`)
+			.get(`https://projecthub-server.onrender.com/projects/${projectKey}`)
 			.then((response) => {
 				// console.log(response.data);
 
@@ -40,7 +40,7 @@ export default function ProjectEditPage() {
 		event.preventDefault();
 		axios
 			.put(
-				`http://localhost:8000/projects/${projectKey}`,
+				`https://projecthub-server.onrender.com/projects/${projectKey}`,
 				{
 					title: iTitle,
 					description: iDescription,

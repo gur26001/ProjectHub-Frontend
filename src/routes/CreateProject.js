@@ -26,7 +26,7 @@ export default function CreateProject() {
 		event.preventDefault();
 		axios
 			.post(
-				`http://localhost:8000/projects/`,
+				`https://projecthub-server.onrender.com/projects/`,
 				{
 					title: ititle,
 					description: iDescription,

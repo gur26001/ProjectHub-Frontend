@@ -8,7 +8,7 @@ function CardsContainer() {
 	const [cardData, setData] = useState([]);
 	const parentRef = useRef(null);
 	useEffect(() => {
-		axios.get('http://localhost:8000/projects/').then((response) => {
+		axios.get('https://projecthub-server.onrender.com/projects/').then((response) => {
 			console.log(response.data);
 			setData(response.data);
 		});

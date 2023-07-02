@@ -26,7 +26,7 @@ export default function ProjectViewPage() {
 
 	useEffect(() => {
 		axios
-			.get(`http://localhost:8000/projects/${projectKey}`)
+			.get(`https://projecthub-server.onrender.com/projects/${projectKey}`)
 			.then((response) => {
 				// console.log(response.data);
 				setProjectData(response.data);
@@ -35,7 +35,7 @@ export default function ProjectViewPage() {
 	function DeletPost(event) {
 		event.preventDefault();
 		axios
-			.delete(`http://localhost:8000/projects/${projectKey}`,{
+			.delete(`https://projecthub-server.onrender.com/projects/${projectKey}`,{
 				headers
 			})
 			.then((resp) => {
